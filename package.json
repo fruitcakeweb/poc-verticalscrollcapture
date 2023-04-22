@@ -1,0 +1,7 @@
+{
+  "name": "poc-verticalscrollcapture",
+  "version": "1.0.0",
+  "devDependencies": {
+    "sass": "latest"
+  }
+}
