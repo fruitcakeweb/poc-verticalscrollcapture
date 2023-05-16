@@ -13,15 +13,18 @@ $(window).on('load', () => {
       if (contentWidth > wrapperWidth) {
         // the amount to scroll horizontally
         const scrollMaximum = contentWidth - wrapperWidth;
+
         // the capture offset from the top of the viewport
         const scrollOffset = window.scrollY - $capture.offset().top;
 
-        // set capture element total height to content width
-        $capture.css('height', contentWidth + 'px');
+        // set capture element total height to content width (and adjust for difference in wrapper width and height)
+        $capture.css('height', (contentWidth + $wrapper.outerHeight() - wrapperWidth) + 'px');
 
-        // clip the scrollOffset between 0 and scrollMaximum and apply
-        $content.css('--scroll',
-            Math.max(0, Math.min(scrollOffset, scrollMaximum)) + 'px');
+        // clip the scrollOffset between 0 and scrollMaximum
+        let clippedScrollOffset = Math.max(0, Math.min(scrollOffset, scrollMaximum));
+
+        // apply the current scroll offset via CSS variable to the content
+        $content.css('--scroll', clippedScrollOffset + 'px');
       }
     };
 
